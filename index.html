@@ -1,1 +1,903 @@
-<h1>Github pages test</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>VitalReminder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --primary-soft: #a5d6a7;
+      --bg: #f3f4f6;
+      --card-bg: #ffffff;
+      --text: #111827;
+      --danger: #c62828;
+      --accent: #0288d1;
+      --radius-lg: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      min-height: 100vh;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      background-color: var(--bg);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 16px 20px 8px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #a5d6a7, #2e7d32);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .logo-text-main {
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--primary);
+    }
+
+    .logo-text-sub {
+      font-size: 12px;
+      color: #4b5563;
+    }
+
+    main {
+      flex: 1;
+      padding: 8px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .screen {
+      display: none;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+
+    h1,h2,h3 {
+      margin: 0 0 8px;
+    }
+
+    h1 {
+      font-size: 22px;
+    }
+
+    h2 {
+      font-size: 20px;
+    }
+
+    h3 {
+      font-size: 18px;
+    }
+
+    p {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+    }
+
+    label {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    input, select, textarea {
+      border-radius: 12px;
+      border: 1px solid #d1d5db;
+      padding: 10px 12px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(46,125,50,0.15);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 999px;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-secondary {
+      background-color: #e5e7eb;
+      color: #111827;
+    }
+
+    .btn-danger {
+      background-color: var(--danger);
+      color: white;
+    }
+
+    .btn-small {
+      width: auto;
+      padding: 8px 14px;
+      font-size: 14px;
+      border-radius: 999px;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .text-sm {
+      font-size: 13px;
+    }
+
+    .link {
+      color: var(--accent);
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .error {
+      color: var(--danger);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .success {
+      color: var(--primary);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .menu-item {
+      background-color: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .menu-item:hover {
+      border-color: var(--primary-soft);
+    }
+
+    .menu-title {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .menu-desc {
+      font-size: 13px;
+      color: #4b5563;
+    }
+
+    .badge {
+      display: inline-flex;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      background-color: var(--primary-soft);
+      color: #1b5e20;
+      font-weight: 600;
+    }
+
+    .reminder-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 260px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .reminder-item {
+      background-color: var(--card-bg);
+      border-radius: 14px;
+      padding: 10px 12px;
+      border-left: 5px solid var(--primary);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .reminder-type {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #6b7280;
+      font-weight: 600;
+    }
+
+    .reminder-main {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .reminder-meta {
+      font-size: 13px;
+      color: #4b5563;
+    }
+
+    .bottom-nav {
+      display: flex;
+      border-top: 1px solid #e5e7eb;
+      background-color: var(--card-bg);
+    }
+
+    .bottom-nav button {
+      flex: 1;
+      padding: 8px 4px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      color: #6b7280;
+    }
+
+    .bottom-nav button.active {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .bottom-nav-icon {
+      font-size: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      background-color: #e5e7eb;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <div class="logo" aria-label="Logo VitalReminder">
+        <div class="logo-circle">VR</div>
+        <div>
+          <div class="logo-text-main">VitalReminder</div>
+          <div class="logo-text-sub">Tu salud, organizada</div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Splash / Bienvenida -->
+      <section id="screen-splash" class="screen active">
+        <div class="card text-center">
+          <h1>Bienvenido(a)</h1>
+          <p>Recordatorios simples para medicamentos y citas médicas, pensados para adultos mayores y cuidadores.</p>
+          <button class="btn btn-primary" onclick="goToScreen('screen-login')">
+            Iniciar sesión
+          </button>
+          <button class="btn btn-secondary" onclick="goToScreen('screen-register')">
+            Crear cuenta
+          </button>
+        </div>
+      </section>
+
+      <!-- Iniciar sesión -->
+      <section id="screen-login" class="screen">
+        <div class="card">
+          <h2>Iniciar sesión</h2>
+          <p class="text-sm">Ingresa con tu correo y contraseña.</p>
+
+          <div class="input-group">
+            <label for="login-email">Correo</label>
+            <input id="login-email" type="email" autocomplete="email" />
+          </div>
+
+          <div class="input-group">
+            <label for="login-password">Contraseña</label>
+            <input id="login-password" type="password" autocomplete="current-password" />
+          </div>
+
+          <div id="login-error" class="error" style="display:none;"></div>
+
+          <button class="btn btn-primary" onclick="handleLogin()">Entrar</button>
+
+          <p class="text-sm text-center" style="margin-top:10px;">
+            ¿No tienes cuenta?
+            <span class="link" onclick="goToScreen('screen-register')">Crear cuenta</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- Crear cuenta -->
+      <section id="screen-register" class="screen">
+        <div class="card">
+          <h2>Crear cuenta</h2>
+          <p class="text-sm">Registra tus datos para empezar a usar VitalReminder.</p>
+
+          <div class="input-group">
+            <label for="reg-name">Nombre</label>
+            <input id="reg-name" type="text" />
+          </div>
+
+          <div class="input-group">
+            <label for="reg-email">Correo</label>
+            <input id="reg-email" type="email" />
+          </div>
+
+          <div class="input-group">
+            <label for="reg-password">Contraseña</label>
+            <input id="reg-password" type="password" />
+          </div>
+
+          <div class="input-group">
+            <label for="reg-role">Rol</label>
+            <select id="reg-role">
+              <option value="adulto">Adulto mayor</option>
+              <option value="cuidador">Cuidador</option>
+            </select>
+          </div>
+
+          <div id="reg-error" class="error" style="display:none;"></div>
+          <div id="reg-success" class="success" style="display:none;"></div>
+
+          <button class="btn btn-primary" onclick="handleRegister()">Crear cuenta</button>
+
+          <p class="text-sm text-center" style="margin-top:10px;">
+            ¿Ya tienes cuenta?
+            <span class="link" onclick="goToScreen('screen-login')">Iniciar sesión</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- Menú principal / Inicio -->
+      <section id="screen-home" class="screen">
+        <div class="card">
+          <h2 id="home-greeting">Hola</h2>
+          <p class="text-sm">
+            Aquí verás tus recordatorios activos de medicamentos y citas médicas.
+          </p>
+
+          <div class="menu-grid" aria-label="Acciones principales">
+            <div class="menu-item" onclick="goToScreen('screen-add-med')">
+              <span class="menu-title">Añadir medicamento</span>
+              <span class="menu-desc">Registra nombre, dosis y horario.</span>
+              <span class="badge">Medicamento</span>
+            </div>
+
+            <div class="menu-item" onclick="goToScreen('screen-add-appointment')">
+              <span class="menu-title">Añadir cita médica</span>
+              <span class="menu-desc">Fecha, hora y médico.</span>
+              <span class="badge">Cita</span>
+            </div>
+
+            <div class="menu-item" onclick="goToScreen('screen-settings')">
+              <span class="menu-title">Ajustes</span>
+              <span class="menu-desc">Alertas y cuidador.</span>
+              <span class="badge">Configuración</span>
+            </div>
+
+            <div class="menu-item" onclick="clearAllData()">
+              <span class="menu-title" style="color:var(--danger);">Borrar datos</span>
+              <span class="menu-desc">Eliminar recordatorios y usuario.</span>
+              <span class="badge" style="background:#ffcdd2;color:#b71c1c;">Cuidado</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Recordatorios</h3>
+          <p class="text-sm">Medicamentos y citas próximos.</p>
+          <div id="reminder-list" class="reminder-list">
+            <!-- Aquí JS inyecta los recordatorios -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Añadir medicamento -->
+      <section id="screen-add-med" class="screen">
+        <div class="card">
+          <h2>Añadir medicamento</h2>
+          <p class="text-sm">Registra un nuevo medicamento para recibir recordatorios.</p>
+
+          <div class="input-group">
+            <label for="med-name">Nombre del medicamento</label>
+            <input id="med-name" type="text" placeholder="Ej. Ibuprofeno" />
+          </div>
+
+          <div class="input-group">
+            <label for="med-dose">Dosis</label>
+            <input id="med-dose" type="text" placeholder="Ej. 1 tableta de 400 mg" />
+          </div>
+
+          <div class="input-group">
+            <label for="med-time">Hora de toma</label>
+            <input id="med-time" type="time" />
+          </div>
+
+          <div class="input-group">
+            <label for="med-frequency">Frecuencia</label>
+            <select id="med-frequency">
+              <option value="una vez al día">Una vez al día</option>
+              <option value="cada 8 horas">Cada 8 horas</option>
+              <option value="cada 12 horas">Cada 12 horas</option>
+              <option value="personalizada">Personalizada</option>
+            </select>
+          </div>
+
+          <div id="med-error" class="error" style="display:none;"></div>
+          <div id="med-success" class="success" style="display:none;"></div>
+
+          <button class="btn btn-primary" onclick="saveMedication()">Guardar medicamento</button>
+          <button class="btn btn-secondary" onclick="goToScreen('screen-home')">Volver al inicio</button>
+        </div>
+      </section>
+
+      <!-- Añadir cita médica -->
+      <section id="screen-add-appointment" class="screen">
+        <div class="card">
+          <h2>Añadir cita médica</h2>
+          <p class="text-sm">Ingresa los datos principales de tu próxima cita.</p>
+
+          <div class="input-group">
+            <label for="app-date">Fecha</label>
+            <input id="app-date" type="date" />
+          </div>
+
+          <div class="input-group">
+            <label for="app-time">Hora</label>
+            <input id="app-time" type="time" />
+          </div>
+
+          <div class="input-group">
+            <label for="app-doctor">Médico / Especialidad</label>
+            <input id="app-doctor" type="text" placeholder="Ej. Dra. López - Dermatología" />
+          </div>
+
+          <div class="input-group">
+            <label for="app-place">Lugar</label>
+            <input id="app-place" type="text" placeholder="Ej. Clínica Central Piso 3" />
+          </div>
+
+          <div id="app-error" class="error" style="display:none;"></div>
+          <div id="app-success" class="success" style="display:none;"></div>
+
+          <button class="btn btn-primary" onclick="saveAppointment()">Guardar cita</button>
+          <button class="btn btn-secondary" onclick="goToScreen('screen-home')">Volver al inicio</button>
+        </div>
+      </section>
+
+      <!-- Ajustes -->
+      <section id="screen-settings" class="screen">
+        <div class="card">
+          <h2>Ajustes</h2>
+          <p class="text-sm">Configura el tipo de alerta y los datos del cuidador.</p>
+
+          <h3 style="margin-top:8px;">Tipo de alerta</h3>
+          <div class="input-group">
+            <label for="alert-type">Tipo de alerta principal</label>
+            <select id="alert-type">
+              <option value="sonora">Sonora</option>
+              <option value="vibracion">Vibración</option>
+              <option value="visual">Visual</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="alert-message">Mensaje recordatorio</label>
+            <textarea id="alert-message" placeholder="Ej. ¡Es hora de tomar tu medicamento!"></textarea>
+          </div>
+
+          <h3 style="margin-top:8px;">Cuidador</h3>
+          <div class="input-group">
+            <label for="caregiver-name">Nombre del cuidador</label>
+            <input id="caregiver-name" type="text" placeholder="Ej. Juan Pérez" />
+          </div>
+
+          <div class="input-group">
+            <label for="caregiver-phone">Contacto del cuidador</label>
+            <input id="caregiver-phone" type="tel" placeholder="Ej. 300 123 4567" />
+          </div>
+
+          <div id="settings-success" class="success" style="display:none;"></div>
+
+          <button class="btn btn-primary" onclick="saveSettings()">Guardar configuración</button>
+          <button class="btn btn-secondary" onclick="goToScreen('screen-home')">Volver al inicio</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Barra de navegación inferior -->
+    <nav class="bottom-nav" aria-label="Navegación principal">
+      <button id="nav-home" class="active" onclick="goToScreen('screen-home', true)">
+        <span class="bottom-nav-icon">🏠</span>
+        <span>Inicio</span>
+      </button>
+      <button id="nav-add" onclick="goToScreen('screen-add-med', true)">
+        <span class="bottom-nav-icon">💊</span>
+        <span>Medicamento</span>
+      </button>
+      <button id="nav-settings" onclick="goToScreen('screen-settings', true)">
+        <span class="bottom-nav-icon">⚙️</span>
+        <span>Ajustes</span>
+      </button>
+    </nav>
+  </div>
+
+  <script>
+    // --- Estado en memoria ---
+    let currentUser = null;
+    let users = [];
+    let medications = [];
+    let appointments = [];
+    let settings = {
+      alertType: "sonora",
+      alertMessage: "¡Es hora de tomar tu medicamento!",
+      caregiverName: "",
+      caregiverPhone: ""
+    };
+
+    // --- Utilidades de almacenamiento local ---
+    function loadFromStorage() {
+      const savedUsers = localStorage.getItem("vr_users");
+      const savedCurrent = localStorage.getItem("vr_current_user");
+      const savedMeds = localStorage.getItem("vr_meds");
+      const savedApps = localStorage.getItem("vr_apps");
+      const savedSettings = localStorage.getItem("vr_settings");
+
+      if (savedUsers) users = JSON.parse(savedUsers);
+      if (savedCurrent) currentUser = JSON.parse(savedCurrent);
+      if (savedMeds) medications = JSON.parse(savedMeds);
+      if (savedApps) appointments = JSON.parse(savedApps);
+      if (savedSettings) settings = JSON.parse(savedSettings);
+    }
+
+    function saveToStorage() {
+      localStorage.setItem("vr_users", JSON.stringify(users));
+      localStorage.setItem("vr_current_user", JSON.stringify(currentUser));
+      localStorage.setItem("vr_meds", JSON.stringify(medications));
+      localStorage.setItem("vr_apps", JSON.stringify(appointments));
+      localStorage.setItem("vr_settings", JSON.stringify(settings));
+    }
+
+    // --- Navegación entre pantallas ---
+    function goToScreen(screenId, fromNav = false) {
+      const screens = document.querySelectorAll(".screen");
+      screens.forEach(s => s.classList.remove("active"));
+      const target = document.getElementById(screenId);
+      if (target) target.classList.add("active");
+
+      // Navegación inferior: actualizar estado visual
+      const navButtons = {
+        "screen-home": "nav-home",
+        "screen-add-med": "nav-add",
+        "screen-settings": "nav-settings"
+      };
+      document.querySelectorAll(".bottom-nav button").forEach(btn => btn.classList.remove("active"));
+      if (navButtons[screenId]) {
+        document.getElementById(navButtons[screenId]).classList.add("active");
+      }
+
+      // Actualizar contenido según pantalla
+      if (screenId === "screen-home") {
+        updateHome();
+      } else if (screenId === "screen-settings") {
+        loadSettingsToForm();
+      }
+    }
+
+    // --- Autenticación básica ---
+    function handleRegister() {
+      const name = document.getElementById("reg-name").value.trim();
+      const email = document.getElementById("reg-email").value.trim();
+      const password = document.getElementById("reg-password").value.trim();
+      const role = document.getElementById("reg-role").value;
+
+      const errorEl = document.getElementById("reg-error");
+      const successEl = document.getElementById("reg-success");
+      errorEl.style.display = "none";
+      successEl.style.display = "none";
+
+      if (!name || !email || !password) {
+        errorEl.textContent = "Por favor completa todos los campos.";
+        errorEl.style.display = "block";
+        return;
+      }
+
+      const existing = users.find(u => u.email === email);
+      if (existing) {
+        errorEl.textContent = "Ya existe una cuenta con este correo.";
+        errorEl.style.display = "block";
+        return;
+      }
+
+      const newUser = { name, email, password, role };
+      users.push(newUser);
+      currentUser = newUser;
+      saveToStorage();
+
+      successEl.textContent = "Cuenta creada correctamente. Te hemos iniciado sesión.";
+      successEl.style.display = "block";
+
+      setTimeout(() => {
+        goToScreen("screen-home");
+      }, 800);
+    }
+
+    function handleLogin() {
+      const email = document.getElementById("login-email").value.trim();
+      const password = document.getElementById("login-password").value.trim();
+      const errorEl = document.getElementById("login-error");
+      errorEl.style.display = "none";
+
+      if (!email || !password) {
+        errorEl.textContent = "Ingresa correo y contraseña.";
+        errorEl.style.display = "block";
+        return;
+      }
+
+      const user = users.find(u => u.email === email && u.password === password);
+      if (!user) {
+        errorEl.textContent = "Credenciales incorrectas.";
+        errorEl.style.display = "block";
+        return;
+      }
+
+      currentUser = user;
+      saveToStorage();
+      goToScreen("screen-home");
+    }
+
+    // --- Home / recordatorios ---
+    function updateHome() {
+      const greetingEl = document.getElementById("home-greeting");
+      if (currentUser) {
+        greetingEl.textContent = `Hola, ${currentUser.name}`;
+      } else {
+        greetingEl.textContent = "Hola";
+      }
+
+      const listEl = document.getElementById("reminder-list");
+      listEl.innerHTML = "";
+
+      if (medications.length === 0 && appointments.length === 0) {
+        const empty = document.createElement("p");
+        empty.className = "text-sm";
+        empty.textContent = "Aún no tienes recordatorios. Añade un medicamento o una cita médica.";
+        listEl.appendChild(empty);
+        return;
+      }
+
+      medications.forEach(m => {
+        const item = document.createElement("div");
+        item.className = "reminder-item";
+        item.innerHTML = `
+          <div class="reminder-type">MEDICAMENTO</div>
+          <div class="reminder-main">${m.name}</div>
+          <div class="reminder-meta">${m.dose}</div>
+          <div class="reminder-meta">Hora: ${m.time} • Frecuencia: ${m.frequency}</div>
+          <div class="pill">Tomar ➜ <strong>Recordar</strong></div>
+        `;
+        listEl.appendChild(item);
+      });
+
+      appointments.forEach(a => {
+        const item = document.createElement("div");
+        item.className = "reminder-item";
+        item.innerHTML = `
+          <div class="reminder-type">CITA MÉDICA</div>
+          <div class="reminder-main">${a.doctor}</div>
+          <div class="reminder-meta">Fecha: ${a.date} • Hora: ${a.time}</div>
+          <div class="reminder-meta">Lugar: ${a.place}</div>
+          <div class="pill">Asistencia ➜ <strong>Confirmar</strong></div>
+        `;
+        listEl.appendChild(item);
+      });
+    }
+
+    // --- Guardar medicamento ---
+    function saveMedication() {
+      const name = document.getElementById("med-name").value.trim();
+      const dose = document.getElementById("med-dose").value.trim();
+      const time = document.getElementById("med-time").value;
+      const frequency = document.getElementById("med-frequency").value;
+
+      const errorEl = document.getElementById("med-error");
+      const successEl = document.getElementById("med-success");
+      errorEl.style.display = "none";
+      successEl.style.display = "none";
+
+      if (!name || !dose || !time) {
+        errorEl.textContent = "Por favor completa nombre, dosis y hora.";
+        errorEl.style.display = "block";
+        return;
+      }
+
+      medications.push({ name, dose, time, frequency });
+      saveToStorage();
+
+      successEl.textContent = "Medicamento guardado.";
+      successEl.style.display = "block";
+
+      // limpiar campos
+      document.getElementById("med-name").value = "";
+      document.getElementById("med-dose").value = "";
+      document.getElementById("med-time").value = "";
+      document.getElementById("med-frequency").value = "una vez al día";
+
+      setTimeout(() => {
+        goToScreen("screen-home");
+      }, 700);
+    }
+
+    // --- Guardar cita médica ---
+    function saveAppointment() {
+      const date = document.getElementById("app-date").value;
+      const time = document.getElementById("app-time").value;
+      const doctor = document.getElementById("app-doctor").value.trim();
+      const place = document.getElementById("app-place").value.trim();
+
+      const errorEl = document.getElementById("app-error");
+      const successEl = document.getElementById("app-success");
+      errorEl.style.display = "none";
+      successEl.style.display = "none";
+
+      if (!date || !time || !doctor) {
+        errorEl.textContent = "Completa fecha, hora y médico.";
+        errorEl.style.display = "block";
+        return;
+      }
+
+      appointments.push({ date, time, doctor, place });
+      saveToStorage();
+
+      successEl.textContent = "Cita médica guardada.";
+      successEl.style.display = "block";
+
+      document.getElementById("app-date").value = "";
+      document.getElementById("app-time").value = "";
+      document.getElementById("app-doctor").value = "";
+      document.getElementById("app-place").value = "";
+
+      setTimeout(() => {
+        goToScreen("screen-home");
+      }, 700);
+    }
+
+    // --- Ajustes / configuración ---
+    function loadSettingsToForm() {
+      document.getElementById("alert-type").value = settings.alertType || "sonora";
+      document.getElementById("alert-message").value = settings.alertMessage || "";
+      document.getElementById("caregiver-name").value = settings.caregiverName || "";
+      document.getElementById("caregiver-phone").value = settings.caregiverPhone || "";
+    }
+
+    function saveSettings() {
+      settings.alertType = document.getElementById("alert-type").value;
+      settings.alertMessage = document.getElementById("alert-message").value.trim() || "¡Es hora de tomar tu medicamento!";
+      settings.caregiverName = document.getElementById("caregiver-name").value.trim();
+      settings.caregiverPhone = document.getElementById("caregiver-phone").value.trim();
+
+      saveToStorage();
+      const msg = document.getElementById("settings-success");
+      msg.textContent = "Configuración guardada.";
+      msg.style.display = "block";
+      setTimeout(() => msg.style.display = "none", 1200);
+    }
+
+    // --- Borrar datos ---
+    function clearAllData() {
+      if (!confirm("¿Seguro que deseas borrar todos los datos de VitalReminder en este dispositivo?")) return;
+      localStorage.removeItem("vr_users");
+      localStorage.removeItem("vr_current_user");
+      localStorage.removeItem("vr_meds");
+      localStorage.removeItem("vr_apps");
+      localStorage.removeItem("vr_settings");
+
+      users = [];
+      currentUser = null;
+      medications = [];
+      appointments = [];
+      settings = {
+        alertType: "sonora",
+        alertMessage: "¡Es hora de tomar tu medicamento!",
+        caregiverName: "",
+        caregiverPhone: ""
+      };
+
+      goToScreen("screen-splash");
+    }
+
+    // --- Inicio de la app ---
+    window.addEventListener("DOMContentLoaded", () => {
+      loadFromStorage();
+
+      if (currentUser) {
+        goToScreen("screen-home");
+      } else {
+        goToScreen("screen-splash");
+      }
+    });
+  </script>
+</body>
+</html>
+
